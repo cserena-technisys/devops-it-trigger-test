@@ -1,0 +1,39 @@
+trigger:
+  branches:
+    include:
+    - master
+    - hotfix*
+  paths:
+    include:
+    - folder/folder1
+    exclude:
+    - folder
+
+pr:
+  branches:
+    include:
+    - master
+    - hotfix*
+  paths:
+    include:
+    - folder/folder1
+    exclude:
+    - folder
+
+resources:
+  repositories:
+  - repository: self
+    type: git
+    ref: testtriggetdevops
+
+jobs:
+  - job: JOB
+    displayName: ECHO
+    pool:
+      vmImage: ubuntu-latest
+    steps:
+    - checkout: self
+      clean: true
+    - script: |
+        echo "Estoy Corriendo Folder 1"
+        
